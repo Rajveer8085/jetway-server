@@ -13,4 +13,5 @@ route.post("/userInfo",jetwaycontroller.userInfo)
 route.post("/booktickets",jetwaycontroller.Booktickets)
 route.post("/fetchtickets",jetwaycontroller.FetchTickets)
 route.post("/cancelticket",jetwaycontroller.cancelTicket)
+route.post("/fetch-flights",jetwaycontroller.FlightData)
 export default route;

@@ -2,6 +2,7 @@ import jetwayUsermodel from "../models/Usermodel.js";
 import nodemailer from "nodemailer"
 import "dotenv/config"
 import TicketsModel from "../models/TIcketsModel.js";
+import axios from "axios";
 
 class jetwaycontroller {
   static async createUser(req, res) {
@@ -41,6 +42,7 @@ class jetwaycontroller {
   }
 
 // user profile page details
+
 static async userInfo(req,res){
   try {
     const {userId} = req.body
@@ -50,7 +52,19 @@ static async userInfo(req,res){
     console.log(error);
   }
 }
+  // flight data with api 
+  static async FlightData (req,res){
+    try {
+      const {to,from} = req.body; 
+      const ApiKey = process.env.AVIATIONSTACK_API;
+      const flightInfo = await axios.get(`https://api.aviationstack.com/v1/flights?access_key=${ApiKey}&dep_iata=${from}&arr_iata=${to}`)
+      res.status(202).json({data:flightInfo.data.data})
+    } catch (error) {
+      console.log(error)  
+    }
+  }
   // contact us thank you mail
+
   static async Confirmation(req, res) {
     try {
       const { emailEle, message } = req.body;
@@ -86,6 +100,7 @@ static async userInfo(req,res){
     }
   }
   
+  // password forgot
   static async ForgotPass(req,res){
     try {
       const {email} = req.body
@@ -120,6 +135,7 @@ static async userInfo(req,res){
       console.log(error);
     }
   }
+  
   // ticket booking info saving in database
 
   static async Booktickets (req,res){
