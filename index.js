@@ -7,7 +7,7 @@ const app = express()
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://jetway-server.vercel.app/verify'
+    'https://jetway-sable.vercel.app'
   ];
   
   app.use(cors({
